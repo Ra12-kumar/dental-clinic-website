@@ -15,7 +15,7 @@ const homeAnchor = (id) => ({ pathname: "/", hash: `#${id}` });
 function Logo() {
   return <Link to="/" className="brand" aria-label={`${clinic.practice} home`}>
     <span className="brand-mark"><Smile size={23} strokeWidth={2.2} aria-hidden="true" /></span>
-    <span className="brand-copy"><strong>{clinic.doctor}</strong><small>Dental Care</small></span>
+    <span className="brand-copy"><strong>{clinic.practice}</strong><small>{clinic.doctor}</small></span>
   </Link>;
 }
 
@@ -84,7 +84,7 @@ export function Footer() {
       </div>
     </div>
     <div className="container footer-legal">
-      <span>© {new Date().getFullYear()} {clinic.practice}</span>
+      <span suppressHydrationWarning>© {new Date().getFullYear()} {clinic.practice}</span>
       <div><Link to="/privacy">Privacy Policy</Link><Link to="/disclaimer">Medical Disclaimer</Link></div>
     </div>
     <p className="container footer-disclaimer">Information on this website is educational and is not a substitute for professional dental advice, diagnosis or treatment. Treatment suitability and availability must be confirmed by the clinic.</p>

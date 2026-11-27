@@ -6,35 +6,41 @@
  * `npm run build` again.
  */
 export const clinic = {
-  doctor: "Dr. Kalvinder",
-  practice: "Dr. Kalvinder Dental Care",
-  city: "Hisar",
+  doctor: "Dr. Kavinder Singh",
+  practice: "Shree Ram Dental Clinic",
+  city: "Rohtak",
   region: "Haryana",
   country: "India",
 
   // Your live domain without a trailing slash, e.g. "https://www.example.com".
   // Needed for canonical URLs, social previews and sitemap.xml.
-  siteUrl: "",
+  siteUrl: "https://dental-two-tan.vercel.app",
+
+  // Google Search Console > HTML tag: paste only the content="..." value here.
+  googleSiteVerification: "",
 
   // Phone as displayed, and WhatsApp number as country code + number, digits only.
   phone: "7988351175",
   phoneCountryCode: "91",
   whatsapp: "917988351175",
-  email: "",
+  email: "kavindersingh890@gmail.com",
 
-  experience: "8 years",
-  qualifications: "", // e.g. "BDS, MDS (…)"
+  experience: "6 years",
+  qualifications: "BDS, PGIMS Rohtak",
   registration: "", // Dental Council registration number
 
-  address: "", // Street address, e.g. "Shop 1, … Road"
-  postalCode: "",
+  address: "Hisar Bypass, Hisar Road, near Indian Oil petrol pump",
+  postalCode: "124001",
   // Google Maps: Share > Embed a map > copy only the src="…" URL.
   // If left empty and `address` is set, a map is generated from the address.
   mapEmbedUrl: "",
 
   // Opening hours, e.g. [{ days: "Monday – Saturday", time: "10:00 AM – 7:00 PM",
   //   schema: "Mo-Sa 10:00-19:00" }]  (`schema` is optional, used by Google)
-  hours: [],
+  hours: [
+    { days: "Timings", time: "10:00 AM – 8:00 PM" },
+    { days: "Weekly holiday", time: "Not specified, please call to confirm" },
+  ],
 
   social: {
     instagram: "", // https://www.instagram.com/your_profile
@@ -55,12 +61,12 @@ export const clinic = {
  */
 export const specialists = [
   {
-    name: "Dr. Kalvinder",
-    role: "Dental professional",
-    experience: "8 years of experience",
+    name: "Dr. Kavinder Singh",
+    role: "Dental Surgeon",
+    experience: "6 years of experience",
     qualifications: clinic.qualifications,
     registration: clinic.registration,
-    photo: "",
+    photo: "/images/dr-kavinder-singh.jpg",
     bio: "Takes time to understand your concerns, explain possible options and help you make informed decisions about your dental care.",
   },
 ];

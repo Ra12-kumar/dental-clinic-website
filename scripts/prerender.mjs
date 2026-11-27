@@ -1,9 +1,15 @@
 // Writes one HTML file per route (content + metadata), plus sitemap.xml and robots.txt.
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { render, pages, getMeta, metaTags, structuredData, siteUrl } from "../dist-ssr/entry-server.js";
+import { render, pages, getMeta, metaTags, structuredData, breadcrumbData, siteUrl } from "../dist-ssr/entry-server.js";
 
-const template = await readFile("dist/index.html", "utf8");
+let template = await readFile("dist/index.html", "utf8");
+// Inline the stylesheet so the first paint does not wait for another request.
+const stylesheet = template.match(/<link rel="stylesheet"[^>]*href="\/(assets\/[^"]+\.css)"[^>]*>/);
+if (stylesheet) {
+  const css = await readFile(path.join("dist", stylesheet[1]), "utf8");
+  template = template.replace(stylesheet[0], () => `<style>${css}</style>`);
+}
 const escape = (v) => String(v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
 async function writePage(route, file) {
@@ -14,12 +20,13 @@ async function writePage(route, file) {
     ...tags.map(([attr, key, content]) => `<meta ${attr}="${key}" content="${escape(content)}" />`),
     canonical && `<link rel="canonical" href="${escape(canonical)}" />`,
     `<script type="application/ld+json">${structuredData()}</script>`,
+    breadcrumbData(meta) && `<script type="application/ld+json">${breadcrumbData(meta)}</script>`,
   ].filter(Boolean).join("\n    ");
   const html = template
     .replace(/<title>[\s\S]*?<\/title>/, "")
     .replace(/\s*<meta name="description"[^>]*>/, "")
     .replace("</head>", () => `    ${head}\n  </head>`)
-    .replace('<div id="root"></div>', () => `<div id="root">${render(route)}</div>`);
+    .replace('<div id="root"></div>', () => `<div id="root" data-route="${escape(route)}">${render(route)}</div>`);
   const target = path.join("dist", file);
   await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, html);

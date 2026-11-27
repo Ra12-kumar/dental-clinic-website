@@ -14,7 +14,7 @@ export function ServicesPage() {
     <div className="container">
       <Back to="/">Home</Back>
       <SectionHeading as="h1" centered eyebrow={`Dental clinic in ${clinic.city}`} title={<>Dental services in <span>{clinic.city}</span></>} text="Read about each treatment and ask us any questions. Availability and suitability are confirmed by the clinic." />
-      <div className="service-grid">{services.map((s) => <ServiceCard key={s.slug} service={s} />)}</div>
+      <div className="service-grid">{services.map((s) => <ServiceCard key={s.slug} service={s} heading="h2" />)}</div>
     </div>
   </section>;
 }
@@ -24,7 +24,8 @@ export function ServicePage() {
   const service = getService(slug);
   if (!service) return <NotFound />;
   const sections = [["What is it?", service.intro], ["When might you need it?", service.when], ["How is it performed?", service.procedure], ["What should you expect?", service.expect], ["Recovery and aftercare", service.aftercare]];
-  const related = [1, 2, 3].map((n) => services[(services.indexOf(service) + n) % services.length]);
+  const related = service.related.map(getService);
+  const guides = articles.filter((a) => a.related.includes(slug));
   return <article key={slug}>
     <header className="detail-hero">
       <div className="container split">
@@ -51,6 +52,10 @@ export function ServicePage() {
         <div className="disclaimer"><ShieldCheck size={20} aria-hidden="true" /><p>General education only. Suitability depends on an individual examination. Discuss benefits, risks and alternatives with your dentist.</p></div>
         <h2>Common questions about {service.title.toLowerCase()}</h2>
         <FaqList items={service.faqs} />
+        {guides.length > 0 && <div className="prose">
+          <h2>Further reading</h2>
+          {guides.map((a) => <p key={a.slug}><Link to={`/articles/${a.slug}`}>{a.title}</Link></p>)}
+        </div>}
       </div>
       <aside>
         <h2>Have questions?</h2>
@@ -90,12 +95,10 @@ export function ArticlePage() {
       <h1>{article.title}</h1>
       <p className="lead">{article.intro}</p>
       <Photo image={article.image} ratio={0.55} priority sizes="(max-width: 800px) 100vw, 780px" />
-      <p>Symptoms and dental needs differ from person to person, so general information cannot tell you what is happening in your individual case.</p>
-      <h2>What should you keep in mind?</h2>
-      <p>Notice changes in your teeth or gums and share your concerns with a dentist, who can examine you, explain possible causes and discuss next steps.</p>
-      <h2>When should you ask for advice?</h2>
-      <p>For persistent pain, swelling, injury or another concern, contact a dental professional. Seek urgent medical attention for difficulty breathing or swallowing.</p>
-      <p>Read more about our <Link to="/services">dental services in {clinic.city}</Link>.</p>
+      {article.sections.map(([heading, text]) => <section key={heading}><h2>{heading}</h2><p>{text}</p></section>)}
+      <h2>Related treatments in {clinic.city}</h2>
+      <p>{article.related.map((s, i) => <span key={s}>{i > 0 && " · "}<Link to={`/treatments/${s}`}>{getService(s).title}</Link></span>)}</p>
+      <p>See all <Link to="/services">dental services in {clinic.city}</Link>.</p>
       <div className="disclaimer"><ShieldCheck size={20} aria-hidden="true" /><p>For general education only; not a substitute for professional advice, diagnosis or treatment.</p></div>
       <BookLink>Ask {clinic.doctor}</BookLink>
     </div>
@@ -113,7 +116,7 @@ export function PolicyPage({ disclaimer = false }) {
         <p>If you have a dental emergency or serious symptoms, seek appropriate urgent care.</p>
       </> : <>
         <p>This website does not store appointment form details. They are placed into a WhatsApp message only when you submit the form, and reach the clinic only if you send it. No appointment is automatically created or confirmed.</p>
-        <p>WhatsApp, Facebook, Instagram and Google Maps handle information under their own privacy terms. Photos and fonts are loaded from Unsplash and Google Fonts, which receive standard technical request data.</p>
+        <p>WhatsApp, Facebook, Instagram and Google Maps handle information under their own privacy terms. Photos are loaded from Unsplash, which receives standard technical request data.</p>
         <p>Avoid including sensitive health information unless you are comfortable sharing it. Contact the clinic with questions about how your information is handled.</p>
       </>}
     </div>

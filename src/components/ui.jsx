@@ -28,7 +28,7 @@ export function Photo({ image, sizes = "(max-width: 760px) 100vw, 400px", priori
   const url = (w) => `${imageUrl(image.id, w)}&h=${Math.round(w * ratio)}`;
   return <img
     src={url(900)}
-    srcSet={[400, 640, 900, 1200].map((w) => `${url(w)} ${w}w`).join(", ")}
+    srcSet={[320, 400, 640, 900, 1200].map((w) => `${url(w)} ${w}w`).join(", ")}
     sizes={sizes}
     width={900}
     height={Math.round(900 * ratio)}
@@ -74,14 +74,14 @@ export function FaqList({ items }) {
   </div>;
 }
 
-export function ServiceCard({ service, delay = 0 }) {
+export function ServiceCard({ service, delay = 0, heading: Heading = "h3" }) {
   const path = `/treatments/${service.slug}`;
   return <Reveal as="article" className="service-card" delay={delay}>
     <Link to={path} className="service-image" tabIndex={-1} aria-hidden="true">
       <Photo image={service.image} alt="" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 290px" />
     </Link>
     <div className="service-body">
-      <h3><Link to={path}>{service.title}</Link></h3>
+      <Heading><Link to={path}>{service.title}</Link></Heading>
       <p>{service.summary}</p>
       <Link className="text-link" to={path} aria-label={`View details: ${service.title}`}>View details <ArrowRight size={15} aria-hidden="true" /></Link>
       <WhatsAppButton message={serviceMessage(service.title)} className="button button-enquire" aria-label={`Enquire on WhatsApp: ${service.title}`}>Enquire on WhatsApp</WhatsAppButton>

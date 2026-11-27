@@ -5,6 +5,7 @@ import { images } from "./images.js";
 export const services = [
   {
     slug: "teeth-whitening",
+    related: ["scaling-polishing","cosmetic-dentistry","smile-makeover"],
     title: "Teeth Whitening",
     image: images.smileScan,
     summary: "Professional options to help improve the appearance of tooth colour.",
@@ -17,6 +18,7 @@ export const services = [
   },
   {
     slug: "root-canal",
+    related: ["crowns-bridges","tooth-extraction","dental-implants"],
     title: "Root Canal Treatment",
     image: images.xray,
     summary: "Treatment for infection or inflammation inside a tooth.",
@@ -29,6 +31,7 @@ export const services = [
   },
   {
     slug: "dental-implants",
+    related: ["crowns-bridges","dentures","tooth-extraction"],
     title: "Dental Implants",
     image: images.implantModel,
     summary: "A tooth-replacement option that may help restore function and appearance.",
@@ -41,6 +44,7 @@ export const services = [
   },
   {
     slug: "braces-aligners",
+    related: ["smile-makeover","cosmetic-dentistry","pediatric-dentistry"],
     title: "Braces and Orthodontics",
     image: images.aligner,
     summary: "Braces or clear aligners to gradually move and align teeth.",
@@ -53,6 +57,7 @@ export const services = [
   },
   {
     slug: "scaling-polishing",
+    related: ["gum-treatment","teeth-whitening","pediatric-dentistry"],
     title: "Teeth Cleaning",
     image: images.examination,
     summary: "Scaling and polishing to remove plaque and hardened deposits.",
@@ -65,6 +70,7 @@ export const services = [
   },
   {
     slug: "tooth-extraction",
+    related: ["dental-implants","dentures","root-canal"],
     title: "Tooth Extraction",
     image: images.quietChair,
     summary: "Removal may be considered when a tooth cannot be preserved.",
@@ -77,6 +83,7 @@ export const services = [
   },
   {
     slug: "cosmetic-dentistry",
+    related: ["teeth-whitening","smile-makeover","crowns-bridges"],
     title: "Cosmetic Dentistry",
     image: images.digitalScan,
     summary: "Options to discuss concerns about the appearance of your smile.",
@@ -89,6 +96,7 @@ export const services = [
   },
   {
     slug: "crowns-bridges",
+    related: ["root-canal","dental-implants","dentures"],
     title: "Dental Crowns and Bridges",
     image: images.jawModel,
     summary: "Restorations that may protect damaged teeth or replace missing ones.",
@@ -101,6 +109,7 @@ export const services = [
   },
   {
     slug: "pediatric-dentistry",
+    related: ["scaling-polishing","braces-aligners","gum-treatment"],
     title: "Pediatric Dentistry",
     image: images.toothbrushes,
     summary: "Dental care and guidance for children's developing smiles.",
@@ -113,6 +122,7 @@ export const services = [
   },
   {
     slug: "smile-makeover",
+    related: ["cosmetic-dentistry","teeth-whitening","braces-aligners"],
     title: "Smile Makeover",
     image: images.consultation,
     summary: "A planned combination of treatments based on your smile goals.",
@@ -125,6 +135,7 @@ export const services = [
   },
   {
     slug: "gum-treatment",
+    related: ["scaling-polishing","tooth-extraction","dental-implants"],
     title: "Gum Treatment",
     image: images.instruments,
     summary: "Assessment and care for bleeding, inflamed or receding gums.",
@@ -137,6 +148,7 @@ export const services = [
   },
   {
     slug: "dentures",
+    related: ["dental-implants","crowns-bridges","tooth-extraction"],
     title: "Dentures",
     image: images.jawModel,
     summary: "Removable options to replace several or all missing teeth.",

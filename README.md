@@ -1,6 +1,6 @@
-# Dr. Kalvinder Dental Care
+# Shree Ram Dental Clinic
 
-Responsive React (Vite) website for a dental clinic in Hisar, Haryana.
+Responsive React (Vite) website for a dental clinic in Rohtak, Haryana.
 
 ## Run locally
 
